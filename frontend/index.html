@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+  <link rel="icon" type="image/svg+xml" sizes="32x32" href="/logo.svg" />
+  <link rel="icon" type="image/svg+xml" sizes="16x16" href="/logo.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/logo.svg" />
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DP Attendance System</title>
+  <meta name="title" content="DP Attendance System">
+  <meta name="description" content="Streamline attendance tracking with DP Attendance System. Feature-rich dashboard, QR code scanning, automated reporting, and WhatsApp notifications for educational institutions.">
+  <meta name="keywords" content="attendance system, student tracking, educational management, QR attendance, digital presence, classroom attendance, school attendance tracker, college attendance, teacher attendance tool, DP Attendance, automated attendance, WhatsApp notifications, attendance dashboard, attendance reports">
+  <meta name="author" content="DP Attendance System">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  <link rel="canonical" href="https://dp-qr.netlify.app/">
+  <meta name="theme-color" content="#1a73e8">
+
+  <!-- Performance optimizations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="modulepreload" href="/src/main.jsx">
+  <link rel="modulepreload" href="/src/App.jsx">
+  
+  <!-- Font loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+  
+  <!-- Critical CSS -->
+  <style>
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0f172a; 
+        color: #f1f5f9; 
+      }
+    }
+    
+    @media (prefers-color-scheme: light) {
+      body {
+        background-color: #f8fafc; 
+        color: #1e293b; 
+      }
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease;
+    }
+    
+    #root {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .loading-spinner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    
+    .loading-spinner::after {
+      content: "";
+      width: 50px;
+      height: 50px;
+      border: 3px solid #e2e8f0;
+      border-radius: 50%;
+      border-top-color: #3b82f6;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root">
+    <div class="loading-spinner"></div>
+  </div>
+  <script type="module" src="/src/main.jsx"></script>
+  
+  <!-- API URL Configuration -->
+  <script>
+    (function() {
+      const isProduction = window.location.hostname !== 'localhost' && 
+                           window.location.hostname !== '127.0.0.1';
+      
+      const apiUrl = isProduction 
+        ? 'https://dp-qr.netlify.app'
+        : 'http://localhost:5001';
+        
+      const linkEl = document.createElement('link');
+      linkEl.rel = 'preconnect';
+      linkEl.href = apiUrl;
+      document.head.appendChild(linkEl);
+      
+      window.API_BASE_URL = apiUrl;
+    })();
+  </script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+          .then(registration => {
+            console.log('Service Worker registered with scope:', registration.scope);
+            
+            // Check for updates
+            registration.addEventListener('updatefound', () => {
+              const newWorker = registration.installing;
+              newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                  // New version available - show update notification only in production
+                  if (location.hostname !== 'localhost' && window.confirm('New version available! Reload to update?')) {
+                    newWorker.postMessage({ type: 'SKIP_WAITING' });
+                    window.location.reload();
+                  }
+                }
+              });
+            });
+          })
+          .catch(error => {
+            console.error('Service Worker registration failed:', error);
+          });
+          
+        // Handle updates from other tabs
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+          window.location.reload();
+        });
+      });
+    }
+  </script>
+  
+  <!-- Image Lazy Loading -->
+  <script>
+    window.addEventListener('load', function() {
+      const lazyImages = document.querySelectorAll('img.lazy');
+      if ('IntersectionObserver' in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              let lazyImage = entry.target;
+              lazyImage.src = lazyImage.dataset.src;
+              lazyImage.classList.remove('lazy');
+              lazyImageObserver.unobserve(lazyImage);
+            }
+          });
+        });
+        lazyImages.forEach(function(lazyImage) {
+          lazyImageObserver.observe(lazyImage);
+        });
+      }
+    });
+  </script>
+  
+  <!-- Web Vitals Reporting -->
+  <script>
+    if ('PerformanceObserver' in window && location.hostname !== 'localhost') {
+      const observer = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        entries.forEach(entry => {
+          // You would send this data to your analytics endpoint
+          if (entry.name === 'LCP' || entry.name === 'FID' || entry.name === 'CLS') {
+            console.log(`Web Vital: ${entry.name}`, entry);
+          }
+        });
+      });
+      observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+    }
+  </script>
+</body>
+
+</html>
