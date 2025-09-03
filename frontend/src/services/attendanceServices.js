@@ -43,19 +43,11 @@ const attendanceService = {
 
     } catch (error) {
       console.error('Error marking QR attendance:', error);
-<<<<<<< HEAD
 
       if (error.response) {
         if (error.response.status === 400) {
           if (error.response.data?.message?.includes('student') &&
             error.response.data?.message?.includes('not found')) {
-=======
-      
-      if (error.response) {
-        if (error.response.status === 400) {
-          if (error.response.data?.message?.includes('student') && 
-              error.response.data?.message?.includes('not found')) {
->>>>>>> fa105640cd26f67cd3fa296c5e378275579c2c7e
             ToastHelper.error('Student not found. Please check the QR code and try again.');
           } else if (error.response.data?.message?.includes('Invalid QR code')) {
             ToastHelper.error('Invalid QR code format. Please try another QR code.');
@@ -147,11 +139,6 @@ const attendanceService = {
           stats: response.data.data.stats || {}
         };
       }
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> fa105640cd26f67cd3fa296c5e378275579c2c7e
       return {
         students: response.data?.students || [],
         stats: response.data?.stats || {}
@@ -166,22 +153,12 @@ const attendanceService = {
   getRecentAttendance: async () => {
     try {
       const response = await api.get('/attendance/today');
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> fa105640cd26f67cd3fa296c5e378275579c2c7e
       if (response.data?.data) {
         return {
           students: response.data.data.students || [],
           stats: response.data.data.stats || {}
         };
       }
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> fa105640cd26f67cd3fa296c5e378275579c2c7e
       return {
         students: response.data?.students || [],
         stats: response.data?.stats || {}
@@ -202,11 +179,6 @@ const attendanceService = {
     try {
       const formattedDate = new Date(date).toISOString().split('T')[0];
       const response = await api.get(`/attendance/${formattedDate}`);
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> fa105640cd26f67cd3fa296c5e378275579c2c7e
 
       if (response.data?.data) {
         return {
@@ -214,11 +186,6 @@ const attendanceService = {
           stats: response.data.data.stats || {}
         };
       }
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> fa105640cd26f67cd3fa296c5e378275579c2c7e
       return {
         students: response.data?.students || [],
         stats: response.data?.stats || {}

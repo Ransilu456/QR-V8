@@ -79,11 +79,7 @@ const StudentsPage = () => {
     try {
       setLoading(true);
       const response = await studentService.getAllStudents();
-<<<<<<< HEAD
-      
-=======
 
->>>>>>> fa105640cd26f67cd3fa296c5e378275579c2c7e
       const studentsArr = response?.students || [];
       setStudents(studentsArr);
 
@@ -92,11 +88,8 @@ const StudentsPage = () => {
       }
     } catch (error) {
       console.error("Error fetching students:", error);
-<<<<<<< HEAD
       setStudents([]); 
-=======
       setStudents([]);
->>>>>>> fa105640cd26f67cd3fa296c5e378275579c2c7e
     } finally {
       setLoading(false);
     }
