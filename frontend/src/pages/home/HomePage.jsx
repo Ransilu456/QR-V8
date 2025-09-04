@@ -86,8 +86,8 @@ const Navbar = memo(() => {
   return (
     <motion.div
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out ${scrolled
-          ? "backdrop-blur-md bg-white/90 dark:bg-slate-900/95 shadow-md dark:shadow-slate-900/30"
-          : "backdrop-blur-sm bg-white/70 dark:bg-slate-900/80"
+        ? "backdrop-blur-md bg-white/90 dark:bg-slate-900/95 shadow-md dark:shadow-slate-900/30"
+        : "backdrop-blur-sm bg-white/70 dark:bg-slate-900/80"
         } border-b ${scrolled
           ? "border-gray-200/70 dark:border-slate-800/80"
           : "border-transparent"
@@ -126,7 +126,7 @@ const Navbar = memo(() => {
 
           {/* Right actions */}
           <div className="flex items-center space-x-3 md:space-x-4">
-          
+
             <motion.div
               className="p-1.5 rounded-lg bg-gray-100 dark:bg-slate-800 transition-colors"
               whileHover={{ scale: 1.05 }}
@@ -253,15 +253,15 @@ const NavigationItem = memo(({ item, index, activeTab, setActiveTab }) => {
     >
       <button
         className={`group flex items-center justify-around p-2.5 w-full text-sm gap-2 font-medium rounded-lg ${activeTab === item.name.toLowerCase()
-            ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shadow-sm"
-            : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:hover:text-white"
+          ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shadow-sm"
+          : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:hover:text-white"
           }`}
         onClick={() => setActiveTab(item.name.toLowerCase())}
       >
         <item.icon
           className={`mr-0 h-5 w-5 flex-shrink-0 ${activeTab === item.name.toLowerCase()
-              ? "text-blue-600 dark:text-blue-400"
-              : "text-gray-400 dark:text-gray-500 group-hover:text-gray-500 dark:group-hover:text-gray-300"
+            ? "text-blue-600 dark:text-blue-400"
+            : "text-gray-400 dark:text-gray-500 group-hover:text-gray-500 dark:group-hover:text-gray-300"
             }`}
           aria-hidden="true"
         />
@@ -363,7 +363,7 @@ const DashboardContent = memo(({ activeTab, screenSize }) => {
         >
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-lg sm:text-xl font-bold mb-1">Welcome back, Teacher!</h2>
+              <h2 className="text-lg sm:text-xl font-bold mb-1 text-white">Welcome back, Teacher!</h2>
               <p className="text-blue-100 text-xs sm:text-sm">
                 Here's what's happening with your class today.
               </p>
@@ -463,7 +463,7 @@ const DashboardContent = memo(({ activeTab, screenSize }) => {
           </div>
         </motion.div>
 
-        
+
         <motion.div
           className="col-span-12 md:col-span-7 bg-white dark:bg-slate-800 rounded-lg sm:rounded-xl shadow p-3 sm:p-5"
           whileHover={isSmallScreen ? {} : {
@@ -653,10 +653,10 @@ const MacOs = memo(() => {
         } else {
           setScreenSize("large");
         }
-      }, 100); 
+      }, 100);
     };
 
-    handleResize(); 
+    handleResize();
     window.addEventListener("resize", handleResize, { passive: true });
     return () => {
       clearTimeout(resizeTimer);
@@ -774,8 +774,8 @@ const MacOs = memo(() => {
               <button
                 key={tab}
                 className={`text-xs sm:text-sm px-2 sm:px-3 py-1 rounded-md ${activeTab === tab.toLowerCase()
-                    ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shadow-sm"
-                    : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:hover:text-white"
+                  ? "bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 shadow-sm"
+                  : "text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 hover:text-gray-900 dark:hover:text-white"
                   }`}
                 onClick={handleTabClick}
               >
@@ -822,7 +822,6 @@ const MacOs = memo(() => {
 });
 
 const Hero = memo(() => {
-  // Use this to detect if we're on a mobile device for optimizing animations
   const isMobile = useMemo(() => window.innerWidth < 768, []);
 
   return (
@@ -981,7 +980,7 @@ const BackgroundEffects = memo(() => {
 
 const Features = memo(() => {
   return (
-    <section className="py-16 md:py-24 relative z-10">
+    <section className="py-16 md:py-24 relative z-10" id="features" >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <motion.h2
@@ -1065,85 +1064,6 @@ const Features = memo(() => {
   );
 });
 
-const Testimonials = memo(() => {
-  return (
-    <section className="py-16 md:py-24  relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 md:mb-16">
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            What Our Users Say
-          </motion.h2>
-          <motion.p
-            className="max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-300"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            Trusted by educational institutions worldwide
-          </motion.p>
-        </div>
-{/* Testimonials grid 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              name: "Dr. Robert Johnson",
-              role: "Principal, Washington High School",
-              text: "This system has transformed our attendance tracking process. The real-time analytics have helped us identify and address attendance issues promptly.",
-              avatar: "https://randomuser.me/api/portraits/men/32.jpg"
-            },
-            {
-              name: "Sarah Williams",
-              role: "Teacher, Lincoln Elementary",
-              text: "The QR code scanning feature saves me so much time every day. It's intuitive, fast, and my students actually enjoy the high-tech approach!",
-              avatar: "https://randomuser.me/api/portraits/women/44.jpg"
-            },
-            {
-              name: "Michael Chen",
-              role: "IT Director, Pacific University",
-              text: "From an IT perspective, this system is well-designed, secure, and easy to implement. The support team has been exceptional during our deployment.",
-              avatar: "https://randomuser.me/api/portraits/men/67.jpg"
-            }
-          ].map((testimonial, index) => (
-            <motion.div
-              key={index}
-              className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-slate-700"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <div className="flex items-center mb-4">
-                <img
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full mr-4 object-cover"
-                />
-                <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{testimonial.name}</h4>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.role}</p>
-                </div>
-              </div>
-              <div className="mb-4 text-yellow-400 flex">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={16} fill="currentColor" />
-                ))}
-              </div>
-              <p className="text-gray-700 dark:text-gray-300">"{testimonial.text}"</p>
-            </motion.div>
-          ))}
-        </div>
-        */}
-      </div>
-    </section>
-  );
-});
 
 const CallToAction = memo(() => {
   return (
@@ -1229,7 +1149,7 @@ const Footer = memo(() => {
           <div className="col-span-2 md:col-span-1">
             <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4">DP Attendance</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-4 max-w-xs">
-              Modern attendance management system made by student who learns from DP Education.
+              A modern attendance management system created by a student learning from DP Education.
             </p>
             <div className="flex space-x-4">
               {/* Social media links */}
@@ -1266,10 +1186,16 @@ const Footer = memo(() => {
             <h4 className="text-sm font-semibold uppercase tracking-wider text-gray-900 dark:text-white mb-4">Product</h4>
             <ul className="space-y-2">
               {[
-                "Features", "Reviews"
+                { name: "Features", href: "#features" },
+                { name: "Reviews", href: "#reviews" }
               ].map((item, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{item}</a>
+                  <a
+                    href={item.href}
+                    className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                  >
+                    {item.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -1344,7 +1270,6 @@ const HomePage = () => {
       </div>
 
       <Features />
-      <Testimonials />
       <Footer />
     </div>
   );
